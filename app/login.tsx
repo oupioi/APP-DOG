@@ -9,6 +9,27 @@ export default function Login() {
   const [password, setPassword] = useState("");
   // Pour les validateurs
   const [errors, setErrors] = useState({});
+  const handleSubmit = async () => {
+    console.log(JSON.stringify({email: email, password: password}));
+    try {
+      const response = await fetch("http://localhost:3000/api/customer/login", {
+      method:"POST",
+      body: JSON.stringify({email: email, password: password}),
+      headers: {
+        'Content-Type': 'application/json'
+      } 
+    });
+    const json = await response.json();
+    if (response.status !== 200) {
+      throw new Error(json.message);
+    }
+    console.log(json.token);
+    
+    return json.token;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
   return (
     <SafeAreaView style={viewStyle.main}>
@@ -23,7 +44,7 @@ export default function Login() {
         </View>
       </View>
 
-        <Pressable style={globalStyleSheet.greenButton}>
+        <Pressable style={globalStyleSheet.greenButton} onPress={handleSubmit}>
           <Text style={globalStyleSheet.greenButtonText}>Login</Text>
         </Pressable>
     </SafeAreaView>
