@@ -19,7 +19,7 @@ export const globalStyleSheet = StyleSheet.create({
         backgroundColor: "white",
         borderWidth: 2,
         borderBottomWidth: 5,
-        borderRadius: 5,
+        borderRadius: 8,
         borderColor: "#c3cede",
         width: "80%",
         paddingHorizontal: 20,

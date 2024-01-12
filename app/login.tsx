@@ -1,6 +1,6 @@
-import { View, Text, Button, StyleSheet, Pressable, TextInput} from 'react-native'
+import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native'
 import { useState } from 'react'
-import { Link } from 'expo-router'
+import { router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { globalStyleSheet } from '../constants/GlobalStyleSheet'
 
@@ -25,7 +25,7 @@ export default function Login() {
     }
     console.log(json.token);
     
-    return json.token;
+    router.replace('/first_page');
     } catch (error) {
       console.log(error);
     }
