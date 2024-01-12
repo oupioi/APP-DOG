@@ -1,18 +1,32 @@
-import { View, Text , Button} from 'react-native'
+import { View, Text , Button, Pressable, StyleSheet} from 'react-native'
 import React from 'react'
 import { Link } from 'expo-router'
+import { globalStyleSheet } from '../constants/GlobalStyleSheet';
 
 export default function index() {
   return (
-    <View style={{flex :1,justifyContent:'center',alignItems:'center'}}>
-      <Text>DogApp</Text>
+    <View style={indexStyle.view}>
+      <Text style={indexStyle.blankDiv}>DogApp</Text>
     <Link href="/register" asChild> 
-    {/* asChild permet d'avoir le bouton lié à la propriété Link  */}
-        <Button title='Viens ici pour l inscription'/>
+      <Pressable style={globalStyleSheet.greenButton}>
+        <Text style={globalStyleSheet.greenButtonText}>Register</Text>
+      </Pressable>
     </Link>
     <Link href="/login" asChild>
-        <Button title='Viens ici pour te connecter'/>
+        <Pressable style={globalStyleSheet.greenButton}>
+          <Text style={globalStyleSheet.greenButtonText}>Login</Text>
+        </Pressable>
     </Link>
     </View>
   )
 }
+
+const indexStyle: any = StyleSheet.create({
+  view: {
+    flex :1,
+    justifyContent:'center',
+    alignItems:'center',
+    flexDirection: 'column',
+    gap: 10
+  }
+});
