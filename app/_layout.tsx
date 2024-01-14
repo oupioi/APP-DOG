@@ -10,9 +10,7 @@ export default function _layout() {
         <Stack.Screen name='register/index' options={{title:'Register'}}/>
         <Stack.Screen name='[missing]' options={{title:'404'}}/>
         <Stack.Screen name='login' options={{title:'Login'}}/>
-
         <Stack.Screen name='(nav)' options={{headerShown: false}}/>
-
     </Stack>
   )
 }
