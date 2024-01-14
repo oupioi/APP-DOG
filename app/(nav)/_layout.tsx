@@ -50,5 +50,5 @@ export default function _layout() {
       </Tabs>
   )
 }
-
+// Style de la barre de navigation
 // Suivre la documentation https://reactnavigation.org/docs/bottom-tab-navigator/#options
