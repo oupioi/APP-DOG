@@ -8,7 +8,7 @@ export const globalStyleSheet = StyleSheet.create({
         borderBottomWidth: 5,
         borderColor: "#34D399",
         borderRadius: 5,
-        minWidth: "50%"
+        width: "60%"
     },
     greenButtonText: {
         color: "#ECFDF5",
@@ -19,6 +19,7 @@ export const globalStyleSheet = StyleSheet.create({
         backgroundColor: "white",
         borderWidth: 2,
         borderBottomWidth: 5,
+        borderTopWidth: 1,
         borderRadius: 8,
         borderColor: "#c3cede",
         width: "80%",
