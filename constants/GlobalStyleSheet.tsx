@@ -39,7 +39,7 @@ export const globalStyleSheet = StyleSheet.create({
     },
     inputForm: {
         borderRadius: 5,
-        backgroundColor: "#E2E8F0",
+        backgroundColor: "#f0f2f5",
         padding: 3,
         color: "#a3afc2",
         width: "100%",

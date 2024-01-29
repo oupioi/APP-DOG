@@ -1,4 +1,4 @@
-import { ModifyUserInterface } from '../interfaces/RequestBodies/ModifyUserInterface';
+import { ModifyUserRequest } from '../interfaces/RequestBodies/ModifyUserRequest';
 import { SecureStoreTool } from '../tools/SecureStoreTool';
 
 export class UserService {
@@ -19,7 +19,7 @@ export class UserService {
       })
     }
 
-    public async updateUserInfos(data: ModifyUserInterface)
+    public async updateUserInfos(data: ModifyUserRequest)
     {
         const token = await SecureStoreTool.getItem("token");
         const userId = await SecureStoreTool.getItem("user_id");

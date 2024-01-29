@@ -3,24 +3,46 @@ import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { UserService } from '../../../services/UserService';
 import { globalStyleSheet } from '../../../constants/GlobalStyleSheet';
+import { PersonalInfosResponse } from '../../../interfaces/ResponseBodies/PersonalInfosResponse';
+import { KeyboardAvoidingView } from 'react-native';
 
-
+/** @todo Changer le formulaire */
 export default function profile() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState<any>({});
+
+  const [email, setEmail] = useState<string>("");
+  const [pseudo, setPseudo] = useState<string>("");
+  /** @todo Modifier le password seulement s'il est rempli */
+  const [password, setPassword] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  /** @todo Ajouter un datepicker */
+  const [lastName, setLastName] = useState<string>("");
+  const [birthDate, setBirthdate] = useState<string|undefined>(undefined);
+  const [notifyFriends, setSetNotifyFriends] = useState<boolean>(false);
+  const [address, setAddress] = useState<string>("");
+  const [zipCode, setZipCode] = useState<number|null>(null);
+  const [city, setCity] = useState<string>("");
+
 
   const userService = new UserService(); 
-  /** @todo faire en sorte qu'il soit égal à true quand on modifie le formulaire */
-  let hasChanged = true;
   const getUserData = async () => {
     try {
       const response = await userService.getPersonalInfos();
-      const json = await response.json();
+      const json: PersonalInfosResponse = await response.json();
+
+      setEmail(json.email);
+      setPseudo(json.pseudo);
+      setFirstName(json.firstName);
+      setLastName(json.lastName);
+      setBirthdate(new Date(json.birthdate).toLocaleDateString("fr-FR"));
+      setSetNotifyFriends(json.notifyFriends);
+      setAddress(json.address.address);
+      setZipCode(json.address.zipCode);
+      setCity(json.address.city);
+
       if (response.status !== 200) {
-        throw new Error(json.message);
+        /** @todo faire autre chose de l'erreur */
+        // throw new Error(json.message);
       }
-      setUserData(json);
-      setIsLoaded(true)
     } catch (error) {}
   }
 
@@ -30,64 +52,63 @@ export default function profile() {
 
 
   return (
-    <SafeAreaView style={profileView.container}>
-      {isLoaded ? (
-        <View style={{display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 20}}>
-          <View style={globalStyleSheet.modalForm}>
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>Pseudo:</Text>
-              <TextInput style={globalStyleSheet.inputForm} value={userData.pseudo}/>
-            </View>
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>Firstname:</Text>
-              <TextInput style={globalStyleSheet.inputForm} value={userData.firstName}/>
-            </View>
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>Lastname:</Text>
-              <TextInput style={globalStyleSheet.inputForm} value={userData.lastName}/>
-            </View>
-
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>Email:</Text>
-              <TextInput style={globalStyleSheet.inputForm} value={userData.email}/>
-            </View>
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>Birthdate:</Text>
-              <TextInput style={globalStyleSheet.inputForm} value={new Date(userData.birthdate).toLocaleDateString('en-EN')}/>
-            </View>
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>Address:</Text>
-              <TextInput style={globalStyleSheet.inputForm} value={userData.address.address}/>
-            </View>
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>Zip code:</Text>
-              <TextInput style={globalStyleSheet.inputForm} keyboardType='number-pad' value={userData.address.zipCode.toString()}/>
-            </View>
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>City:</Text>
-              <TextInput style={globalStyleSheet.inputForm} value={userData.address.city}/>
-            </View>
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>Sex:</Text>
-              <TextInput style={globalStyleSheet.inputForm} value={userData.sex.name}/>
-            </View>
-            <View style={globalStyleSheet.inputContainer}>
-              <Text style={globalStyleSheet.inputLabel}>Notify friends:</Text>
-              <TextInput style={globalStyleSheet.inputForm} value={'Hello'}/>
-            </View>
+    <KeyboardAvoidingView>
+      <SafeAreaView style={profileView.container}>
+        <View style={globalStyleSheet.modalForm}>
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>Email</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={setEmail} defaultValue={email}/>
           </View>
-          { hasChanged ? (
-            <Pressable style={globalStyleSheet.greenButton} onPress={() => {
-
-            }}>
-              <Text style={globalStyleSheet.greenButtonText}>Save</Text>
-            </Pressable>
-          ): null}
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>Pseudo</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={setPseudo} defaultValue={pseudo}/>
+          </View>
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>New password</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={setPassword} defaultValue={undefined}/>
+          </View>
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>First name</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={setFirstName} defaultValue={firstName}/>
+          </View>
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>Last name</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={setLastName} defaultValue={lastName}/>
+          </View>
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>Birthdate</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={setBirthdate} defaultValue={birthDate}/>
+          </View>
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>Notify friends</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={(value) => {setEmail(new Date(value).toString())}} defaultValue={notifyFriends.toString()}/>
+          </View>
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>Address</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={setAddress} defaultValue={address}/>
+          </View>
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>Zipcode</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={(value) => {setZipCode(parseInt(value))}} defaultValue={zipCode?.toString()}/>
+          </View>
+          <View style={globalStyleSheet.inputContainer}>
+            <Text style={globalStyleSheet.inputLabel}>City</Text>
+            <TextInput style={globalStyleSheet.inputForm} onChangeText={setCity} defaultValue={city}/>
+          </View>
         </View>
-      ): (
-        <Text>Loading...</Text>
-      )}
-    </SafeAreaView>
+        <Pressable style={[globalStyleSheet.greenButton, {marginTop: 20}]} onPress={
+          () => {
+            /** @todo Appliquer les modifs */ 
+            console.log({
+              pseudo: pseudo,
+              email: email,
+              password: password
+            });
+        }}>
+          <Text style={globalStyleSheet.greenButtonText}>Save</Text>
+        </Pressable>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 

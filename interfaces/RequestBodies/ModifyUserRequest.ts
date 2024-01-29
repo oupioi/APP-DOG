@@ -1,7 +1,7 @@
 import { AddressInterface } from "../AddressInterface";
 import { SexInterface } from "../SexInterface";
 
-export interface ModifyUserInterface
+export interface ModifyUserRequest
 {
     id: number;
     email: string;

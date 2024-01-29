@@ -1,1 +1,5 @@
-export interface SexInterface { name: string }
+export interface SexInterface 
+{
+    id?: number;
+    name: string
+}
