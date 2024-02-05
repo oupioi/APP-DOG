@@ -6,7 +6,7 @@ export default function index() {
   return (
     <View>
       <Text>On s'enregistre ici</Text>
-      <Link href="/registration_confirmation" asChild> 
+      <Link href="/screens/register/ConfirmationScreen" asChild> 
       <Button title='Confirmation'/>
     </Link>
     </View>

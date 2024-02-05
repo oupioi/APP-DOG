@@ -1,18 +1,36 @@
-import { View, Text , Button} from 'react-native'
-import React from 'react'
-import { Link } from 'expo-router'
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Link } from 'expo-router';
 
-export default function index() {
+export default function Page() {
   return (
-    <View style={{flex :1,justifyContent:'center',alignItems:'center'}}>
-      <Text>DogApp</Text>
-    <Link href="/register" asChild> 
-    {/* asChild permet d'avoir le bouton lié à la propriété Link  */}
-        <Button title='Viens ici pour l inscription'/>
-    </Link>
-    <Link href="/login" asChild>
-        <Button title='Viens ici pour te connecter'/>
-    </Link>
-    </View>
-  )
-}
+    <View style={styles.container}>
+      <View style={styles.main}>
+        <Text style={styles.title}>Dog APP 🐶</Text>
+                <Link href="/screens/LoginScreen">Se connecter</Link>
+                <Link href="/screens/register/RegisterScreen">S'inscrire</Link>
+              </View>
+            </View>
+          );
+        }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    padding: 24,
+  },
+  main: {
+    flex: 1,
+    justifyContent: "center",
+    maxWidth: 960,
+    marginHorizontal: "auto",
+  },
+  title: {
+    fontSize: 64,
+    fontWeight: "bold",
+  },
+  subtitle: {
+    fontSize: 36,
+    color: "#38434D",
+  },
+});
