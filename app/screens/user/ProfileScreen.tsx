@@ -5,6 +5,7 @@ import { UserService } from '../../services/UserService';
 import { globalStyleSheet } from '../../../constants/GlobalStyleSheet';
 import { PersonalInfosResponse } from '../../interfaces/ResponseBodies/PersonalInfosResponse';
 import { KeyboardAvoidingView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 /** @todo Changer le formulaire */
 export default function Profile() {
