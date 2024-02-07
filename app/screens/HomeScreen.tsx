@@ -5,7 +5,7 @@ import Calendar from './CalendarScreen';
 import MapScreen from './MapScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
+import DefaultHeader from '../components/headers/defaultHeader';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +25,8 @@ export default function index() {
               size={24}
               color={focused ? "#6EE7B7" : "#ECFDF5"}
             />
-          )
+          ),
+          header: () => <DefaultHeader name='Profile'/>,
         }}
       />
 
