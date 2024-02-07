@@ -6,12 +6,14 @@ import MapScreen from './MapScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
+import ParkCard from '../components/ParkCard';
+import ParkScreen from './ParkScreen';
 
 const Tab = createBottomTabNavigator();
 
 export default function index() {
   return (
-    <Tab.Navigator screenOptions={{ 
+    <Tab.Navigator screenOptions={{
       tabBarStyle: { backgroundColor: '#64748B' },
       tabBarActiveTintColor: '#6EE7B7',
     }}>
@@ -19,6 +21,20 @@ export default function index() {
         component={Profile}
         options={{
           tabBarLabel: "Profile",
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name="person"
+              size={24}
+              color={focused ? "#6EE7B7" : "#ECFDF5"}
+            />
+          )
+        }}
+      />
+
+      <Tab.Screen name="Park"
+        component={ParkScreen}
+        options={{
+          tabBarLabel: "Park",
           tabBarIcon: ({ focused }) => (
             <Ionicons
               name="person"
