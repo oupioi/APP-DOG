@@ -6,6 +6,10 @@ export class SecureStoreTool
     {
         await SecureStore.setItemAsync(key, value);
     }
+    static async delete(key: string)
+    {
+        await SecureStore.deleteItemAsync(key);
+    }
 
     static async getItem(key: string)
     {

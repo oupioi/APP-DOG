@@ -5,11 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyleSheet } from '../../constants/GlobalStyleSheet';
 import { SecureStoreTool } from '../utils/SecureStoreTool';
 import { object, string, ValidationError } from 'yup';
+import { UserService } from '../services/UserService';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState<string|null>(null);
+  const userService = new UserService();
 
   useEffect(() => {
     getToken();
@@ -37,22 +39,7 @@ export default function LoginScreen() {
           return;
         }
       }
-      
-      const response = await fetch('http://localhost:3000/api/customer/login', {
-        method: 'POST',
-        body: JSON.stringify({ email: email, password: password }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const json = await response.json();
-
-      if (response.status !== 200) {
-        throw new Error(json.message);
-      }
-
-      await SecureStoreTool.save('token', json.token);
-      await SecureStoreTool.save('user_id', json.user_id.toString());
+      await userService.login({email: email, password: password});
 
       router.replace('/screens/HomeScreen');
     } catch (error) {
