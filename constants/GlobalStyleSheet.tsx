@@ -22,7 +22,7 @@ export const globalStyleSheet = StyleSheet.create({
         borderTopWidth: 1,
         borderRadius: 8,
         borderColor: "#c3cede",
-        width: "80%",
+        width: "90%",
         paddingHorizontal: 20,
         paddingVertical: 40,
         gap: 10

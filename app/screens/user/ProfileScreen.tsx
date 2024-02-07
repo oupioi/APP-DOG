@@ -27,23 +27,20 @@ export default function Profile() {
   const getUserData = async () => {
     try {
       const response = await userService.getPersonalInfos();
-      const json: PersonalInfosResponse = await response.json();
 
-      setEmail(json.email);
-      setPseudo(json.pseudo);
-      setFirstName(json.firstName);
-      setLastName(json.lastName);
-      setBirthdate(new Date(json.birthdate).toLocaleDateString("fr-FR"));
-      setSetNotifyFriends(json.notifyFriends);
-      setAddress(json.address.address);
-      setZipCode(json.address.zipCode);
-      setCity(json.address.city);
-
-      if (response.status !== 200) {
-        /** @todo faire autre chose de l'erreur */
-        // throw new Error(json.message);
-      }
-    } catch (error) {}
+      setEmail(response.email);
+      setPseudo(response.pseudo);
+      setFirstName(response.firstName);
+      setLastName(response.lastName);
+      setBirthdate(new Date(response.birthdate).toLocaleDateString("fr-FR"));
+      setSetNotifyFriends(response.notifyFriends);
+      setAddress(response.address.address);
+      setZipCode(response.address.zipCode);
+      setCity(response.address.city);
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
