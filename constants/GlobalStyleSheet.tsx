@@ -44,5 +44,9 @@ export const globalStyleSheet = StyleSheet.create({
         color: "#a3afc2",
         width: "100%",
         fontWeight: "bold"
+    },
+    formError: {
+        color: "red",
+        fontSize: 12
     }
 })
