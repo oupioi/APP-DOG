@@ -1,30 +1,47 @@
 import axios from 'axios';
-import {EventInterface} from '../interfaces/EventInterface'
+import { EventInterface } from '../interfaces/EventInterface'
+import { SecureStoreTool } from '../utils/SecureStoreTool';
 
 export class EventService {
     baseUrl = "http://localhost:3000";
 
-    public async getEvents() {
-        return await axios.get(`${this.baseUrl}/api/event`);
+    private async getHeaders() {
+        const token = await SecureStoreTool.getItem("token");
+        return {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+    }
+
+    public async getEvents(): Promise<[]> {
+        const headers = await this.getHeaders();
+        const events = await axios.get(`${this.baseUrl}/api/event`, headers);
+        return events.data.events // Access the 'data' property instead of 'events'
     }
 
     public async getEventById(eventId: number) {
-        return await axios.get(`${this.baseUrl}/api/event/${eventId}`);
+        const headers = await this.getHeaders();
+        return await axios.get(`${this.baseUrl}/api/event/${eventId}`, headers);
     }
 
     public async createEvent(data: EventInterface) {
-        return await axios.post(`${this.baseUrl}/api/event`, data);
+        const headers = await this.getHeaders();
+        return await axios.post(`${this.baseUrl}/api/event`, data, headers);
     }
 
     public async updateEvent(eventId: number, data: EventInterface) {
-        return await axios.put(`${this.baseUrl}/api/event/${eventId}`, data);
+        const headers = await this.getHeaders();
+        return await axios.put(`${this.baseUrl}/api/event/${eventId}`, data, headers);
     }
 
     public async deleteEvent(eventId: number) {
-        return await axios.delete(`${this.baseUrl}/api/event/${eventId}`);
+        const headers = await this.getHeaders();
+        return await axios.delete(`${this.baseUrl}/api/event/${eventId}`, headers);
     }
 
     public async joinEvent(eventId: number) {
-        return await axios.post(`${this.baseUrl}/api/event/join/${eventId}`);
+        const headers = await this.getHeaders();
+        return await axios.post(`${this.baseUrl}/api/event/join/${eventId}`, null, headers);
     }
 }

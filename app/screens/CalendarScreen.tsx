@@ -1,13 +1,19 @@
 import { View, Text } from 'react-native'
 import React, { useState } from 'react'
-import { EventService } from '../services/EventService';}
-
-import CardEvent from '../components/cardEvent'
+import { EventService } from '../services/EventService';
+import { EventInterface } from '../interfaces/EventInterface';
 
 export default function Calendar() {
-  const [Events, SetEvents ] = useState();
-  const data = getEvents();
+  const e = new EventService();
+  let data = e.getEvents()
+  const [events, setEvents] = useState<EventInterface[]>([])
+  data.then((res) => {
+    console.log(res);
+  })
   return (
-   <CardEvent></CardEvent>
+    <View>
+
+    </View>
+
   )
 }
