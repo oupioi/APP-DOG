@@ -33,7 +33,7 @@ export class UserService {
     public async login(data: LoginRequest)
     {
       try {
-        const response = await axios.post<LoginResponse>(`${this.baseUrl}/api/customer/login`, {data});
+        const response = await axios.post<LoginResponse>(`${this.baseUrl}/api/customer/login`, {email: data.email, password: data.password});
 
         await SecureStoreTool.save('token', response.data.token);
         await SecureStoreTool.save('user_id', response.data.user_id.toString());

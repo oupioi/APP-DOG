@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, TextInput, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { UserService } from '../../services/UserService';
-import { globalStyleSheet } from '../../../constants/GlobalStyleSheet';
-import { PersonalInfosResponse } from '../../interfaces/ResponseBodies/PersonalInfosResponse';
+import { UserService } from '../../../services/UserService';
+import { globalStyleSheet } from '../../../../constants/GlobalStyleSheet';
+import { PersonalInfosResponse } from '../../../interfaces/ResponseBodies/PersonalInfosResponse';
 import { KeyboardAvoidingView } from 'react-native';
 
 /** @todo Changer le formulaire */
@@ -49,6 +49,7 @@ export default function Profile() {
 
 
   return (
+    
     <KeyboardAvoidingView>
       <SafeAreaView style={profileView.container}>
         <View style={globalStyleSheet.modalForm}>
