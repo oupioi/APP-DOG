@@ -23,7 +23,7 @@ export class UserService {
     public async updateUserInfos(data: ModifyUserRequest)
     {
       try {
-        const response = await axios.put(`${this.baseUrl}/api/customer/personal-infos/:userId`, {headers: {requiresAuth: true}, data});
+        const response = await axios.put(`${this.baseUrl}/api/customer/:userId`, data, {headers: {requiresAuth: true}});
         return response.data;
       } catch (error) {
         throw error as ErrorResponse;

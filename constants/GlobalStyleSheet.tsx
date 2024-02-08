@@ -50,5 +50,9 @@ export const globalStyleSheet = StyleSheet.create({
     formError: {
         color: "red",
         fontSize: 12
+    },
+    validationMsg: {
+        color: "green",
+        fontSize: 12
     }
 })

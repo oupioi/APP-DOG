@@ -11,9 +11,6 @@ import ProfileModal from '../../../components/user/profileModal';
 export default function Profile() {
 
   const [user, setUser] = useState<PersonalInfosResponse|null>(null);
-  const test = () => {
-    console.log('test');
-  }
 
   const userService = new UserService(); 
   const getUserData = async () => {
@@ -36,7 +33,10 @@ export default function Profile() {
         <SafeAreaView style={profileView.container}>
           {/* <TopButton icon='team'/> */}
           { user !== null ? 
-          <><UserPresentation lastName={user.lastName} firstName={user.firstName} pseudo={user.pseudo}></UserPresentation><ProfileModal data={user} callBack={test}></ProfileModal></>
+          <>
+            <UserPresentation lastName={user.lastName} firstName={user.firstName} pseudo={user.pseudo}/>
+            <ProfileModal data={user}/>
+          </>
           : null}
         </SafeAreaView>
       </ScrollView>
