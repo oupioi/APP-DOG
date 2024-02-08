@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { globalStyleSheet } from '../../constants/GlobalStyleSheet';
-import { SecureStoreTool } from '../utils/SecureStoreTool';
+import { SecureStoreTool } from '../../utils/SecureStoreTool';
 import { object, string, ValidationError } from 'yup';
-import { UserService } from '../services/UserService';
+import { UserService } from '../../services/UserService';
+import { globalStyleSheet } from '../../../constants/GlobalStyleSheet';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
