@@ -14,9 +14,11 @@ const s$ = StyleSheet.create({
     header: {
         marginTop: 80,
         marginLeft: 20,
-        width: '50%',
         position: 'relative',
-        marginBottom: 10
+        width: 100,
+        marginBottom: 0,
+        height: 60,
+        backgroundColor: 'transparent'
     },
     headerTitle: {
         color: 'white',

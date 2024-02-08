@@ -5,10 +5,10 @@ import Calendar from './CalendarScreen';
 import MapScreen from './MapScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import DefaultHeader from '../components/headers/defaultHeader';
+import TopButton from '../components/headers/topButton';
+import { router } from 'expo-router';
 
 const Tab = createBottomTabNavigator();
-
 export default function index() {
   return (
     <Tab.Navigator screenOptions={{ 
@@ -26,7 +26,16 @@ export default function index() {
               color={focused ? "#6EE7B7" : "#ECFDF5"}
             />
           ),
-          header: () => <DefaultHeader name='Profile'/>,
+          // header: () => <DefaultHeader name='Profile'/>
+          headerStyle: {
+            backgroundColor: '#64748B',
+            height: 120
+          },
+          headerTitleStyle: {
+            color: 'white'
+          },
+          headerTitleAlign: 'left',
+          headerRight: () => <><TopButton icon='team' color='white' callBack={() => {router.push('/screens/LoginScreen')}}/></>
         }}
       />
 
