@@ -4,40 +4,42 @@ import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyleSheet } from '../../constants/GlobalStyleSheet';
 import { SecureStoreTool } from '../utils/SecureStoreTool';
+import { object, string, ValidationError } from 'yup';
+import { UserService } from '../services/UserService';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({});
+  const [errorMsg, setErrorMsg] = useState<string|null>(null);
+  const userService = new UserService();
 
   useEffect(() => {
     getToken();
   }, []);
 
-  let token: false | string = false;
+  let loginSchema = object({
+    email: string().email('Must be a valid email').required('Email is required'),
+    password: string().required('Password is required')
+  });
 
   const getToken = async () => {
-    token = await SecureStoreTool.getItem('token');
+    const token = await SecureStoreTool.getItem('token');
+    if (token) {
+      router.replace('/screens/HomeScreen');
+    }
   };
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/customer/login', {
-        method: 'POST',
-        body: JSON.stringify({ email: email, password: password }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const json = await response.json();
-
-      if (response.status !== 200) {
-        throw new Error(json.message);
+      try {
+        await loginSchema.validate({email: email, password: password});
+      } catch (error) {
+        if (error instanceof ValidationError) {
+          setErrorMsg(error.errors[0]);
+          return;
+        }
       }
-
-      await SecureStoreTool.save('token', json.token);
-      await SecureStoreTool.save('user_id', json.user_id.toString());
+      await userService.login({email: email, password: password});
 
       router.replace('/screens/HomeScreen');
     } catch (error) {
@@ -75,10 +77,11 @@ export default function LoginScreen() {
             clearTextOnFocus={true}
           />
         </View>
+        {errorMsg ? <Text style={globalStyleSheet.formError}>{errorMsg}</Text> : null}
       </View>
 
       <Pressable style={globalStyleSheet.greenButton} onPress={handleSubmit}>
-        <Text style={globalStyleSheet.greenButtonText}>Login</Text>
+         <Text style={globalStyleSheet.greenButtonText}>Login</Text>
       </Pressable>
     </SafeAreaView>
   );
