@@ -4,40 +4,30 @@ import { useEffect, useState } from "react";
 import { SecureStoreTool } from "./utils/SecureStoreTool";
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isAuth, setIsAuth] = useState<boolean>(false);
 
-  const getStoredUser = async () => {
-    // await SecureStoreTool.delete('token')
-    const foundToken = await SecureStoreTool.getItem('token');
-    const foundId = await SecureStoreTool.getItem('user_id');
-
-    setIsLoading(false);
-    setIsAuth(foundToken && foundId ? true : false);
-  }
+  
 
   useEffect(() => {
+    const getStoredUser = async () => {
+      // await SecureStoreTool.delete('token')
+      const foundToken = await SecureStoreTool.getItem('token');
+      const foundId = await SecureStoreTool.getItem('user_id');
+  
+      if (foundToken && foundId) {
+        router.replace('/screens/main/HomeScreen')
+      } else {
+        router.replace('/screens/auth/LoginScreen');
+      }
+    }
     getStoredUser()
   }, [])
-
-  useEffect(() => {
-    if (isAuth === true) {
-      router.replace('/screens/HomeScreen')
-    }
-  }, [isAuth])
   
   return (
     <View style={styles.container}>
       <View style={styles.main}>
         <Text style={styles.title}>Dog APP 🐶</Text>
-          { isLoading === false && isAuth === false ? 
-          <>
-            <Link href="/screens/register/LoginScreen">Login</Link>
-            <Link href="/screens/register/RegisterScreen">Register</Link>
-          </>
-          : null}
-        </View>
       </View>
+    </View>
     );
   }
 

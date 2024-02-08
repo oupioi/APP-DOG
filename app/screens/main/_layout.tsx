@@ -21,6 +21,7 @@ export default function AppLayout() {
                 )
             }}/>
             <Tabs.Screen name='HomeScreen' options={{
+                headerTitle: 'Home',
                 tabBarLabel: "Home",
                 tabBarIcon: ({ focused }) => (
                   <Ionicons
@@ -31,6 +32,7 @@ export default function AppLayout() {
                 )
             }}/>
             <Tabs.Screen name='CalendarScreen' options={{
+                headerTitle: 'Calendar',
                 tabBarLabel: "Calendar",
                 tabBarIcon: ({ focused }) => (
                   <Ionicons
@@ -41,7 +43,6 @@ export default function AppLayout() {
                 )
             }}/>
             <Tabs.Screen name='[missing]' options={{href: null}}/>
-            <Tabs.Screen name='register' options={{href: null}}/>
         </Tabs>
     )
 }
