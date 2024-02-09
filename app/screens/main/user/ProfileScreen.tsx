@@ -6,6 +6,8 @@ import { PersonalInfosResponse } from '../../../interfaces/ResponseBodies/Person
 import { KeyboardAvoidingView } from 'react-native';
 import UserPresentation from '../../../components/user/userPresentation';
 import ProfileModal from '../../../components/user/profileModal';
+import DefaultHeader from '../../../components/headers/defaultHeader';
+import TopButton from '../../../components/headers/topButton';
 
 /** @todo Changer le formulaire */
 export default function Profile() {
@@ -30,13 +32,15 @@ export default function Profile() {
   return (
     <KeyboardAvoidingView>
       <ScrollView>
+        <DefaultHeader name='Profile'>
+          <TopButton icon='team' color='#64748B' callBack={() => console.log('hello')}/>
+        </DefaultHeader>
         <SafeAreaView style={profileView.container}>
-          {/* <TopButton icon='team'/> */}
           { user !== null ? 
-          <>
-            <UserPresentation lastName={user.lastName} firstName={user.firstName} pseudo={user.pseudo}/>
-            <ProfileModal data={user} refreshUser={getUserData}/>
-          </>
+            <>
+              <UserPresentation lastName={user.lastName} firstName={user.firstName} pseudo={user.pseudo}/>
+              <ProfileModal data={user} refreshUser={getUserData}/>
+            </>
           : null}
         </SafeAreaView>
       </ScrollView>

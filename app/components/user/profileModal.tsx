@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {Text, View, TextInput, Pressable, Button} from 'react-native';
 import { globalStyleSheet } from '../../../constants/GlobalStyleSheet';
 import { PersonalInfosResponse } from '../../interfaces/ResponseBodies/PersonalInfosResponse';
