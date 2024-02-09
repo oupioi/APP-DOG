@@ -12,19 +12,18 @@ const TopButton: React.FC<TopButtonProps> = (props) => {
 
     return (
         <Pressable onPress={props.callBack !== null ? props.callBack : null} style={[s$.button, {borderColor: props.color}]}>
-        <AntDesign name={props.icon} size={24} color={props.color}/>
-        {/* <AntDesign style={[s$.button, props.position !== 1 ? {right: 30} : {right: 20}]} name={props.icon} size={24} color="black"/> */}
-    </Pressable>
+            {/* <AntDesign name={props.icon} size={24} color={props.color}/> */}
+            <AntDesign name={props.icon} size={24} color={props.color}/>
+        </Pressable>
     )
 }
 
 const s$ = StyleSheet.create({
     button: {
         // zIndex: 2,
-        padding: 3,
-        marginRight: 20,
+        padding: 5,
         borderWidth:2,
-        borderRadius: 50
+        borderRadius: 50,
     }
 });
 
