@@ -7,7 +7,8 @@ export default function AppLayout() {
         <Tabs screenOptions={{ 
                 tabBarStyle: { backgroundColor: '#64748B' },
                 tabBarActiveTintColor: '#6EE7B7',
-                tabBarInactiveTintColor: '#ECFDF5'
+                tabBarInactiveTintColor: '#ECFDF5',
+                headerTitleAlign: 'left'
             }}>
             <Tabs.Screen name='user' options={{
                 headerShown: false,
