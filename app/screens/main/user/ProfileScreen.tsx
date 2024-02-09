@@ -35,7 +35,7 @@ export default function Profile() {
           { user !== null ? 
           <>
             <UserPresentation lastName={user.lastName} firstName={user.firstName} pseudo={user.pseudo}/>
-            <ProfileModal data={user}/>
+            <ProfileModal data={user} refreshUser={getUserData}/>
           </>
           : null}
         </SafeAreaView>
