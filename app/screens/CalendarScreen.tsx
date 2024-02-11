@@ -8,12 +8,18 @@ export default function Calendar() {
   let data = e.getEvents()
   const [events, setEvents] = useState<EventInterface[]>([])
   data.then((res) => {
-    console.log(res);
+    setEvents(res)
   })
+
   return (
     <View>
-
+      {events.map((event, index) => {
+        return (
+          <View key={index}>
+            <Text>{event.title}</Text>
+          </View>
+        )
+      })}
     </View>
-
   )
 }

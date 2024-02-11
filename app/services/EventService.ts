@@ -14,10 +14,11 @@ export class EventService {
         };
     }
 
-    public async getEvents(): Promise<[]> {
+    public async getEvents(): Promise<EventInterface[]> {
         const headers = await this.getHeaders();
-        const events = await axios.get(`${this.baseUrl}/api/event`, headers);
-        return events.data.events // Access the 'data' property instead of 'events'
+        const events = await axios.get(`${this.baseUrl}/api/event`, headers).then
+            (res => res.data);
+        return events;
     }
 
     public async getEventById(eventId: number) {
