@@ -11,3 +11,8 @@ export interface EventInterface {
     address: AddressInterface;
     tabUser: number[];
 }
+
+export interface EventData {
+    events: EventInterface[];
+    total_items: number;
+  }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { EventInterface } from '../interfaces/EventInterface'
+import { EventInterface,EventData } from '../interfaces/EventInterface'
 import { SecureStoreTool } from '../utils/SecureStoreTool';
 
 export class EventService {
@@ -14,10 +14,10 @@ export class EventService {
         };
     }
 
-    public async getEvents(): Promise<EventInterface[]> {
+    public async getEvents(): Promise<EventData[]>{
         const headers = await this.getHeaders();
-        const events = await axios.get(`${this.baseUrl}/api/event`, headers).then
-            (res => res.data);
+        const events: EventData[] = await axios.get(`${this.baseUrl}/api/event`, headers).then
+        (res => res.data);
         return events;
     }
 
