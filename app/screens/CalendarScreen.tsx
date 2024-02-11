@@ -7,8 +7,8 @@ export default function Calendar() {
   const e = new EventService();
   let data = e.getEvents()
   const [events, setEvents] = useState<EventInterface[]>([])
-  // data.then((res) => {
-    setEvents(res)
+  data.then((res) => {
+    // setEvents(res)
   })
 
   return (
