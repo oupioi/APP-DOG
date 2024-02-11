@@ -6,7 +6,7 @@ export interface ModifyUserRequest
     id: number;
     email: string;
     pseudo: string;
-    password: string;
+    password?: string;
     firstName: string;
     lastName: string;
     birthdate: string;

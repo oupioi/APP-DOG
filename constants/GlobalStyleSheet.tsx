@@ -35,7 +35,8 @@ export const globalStyleSheet = StyleSheet.create({
     },
     inputLabel: {
         fontWeight: "bold",
-        color: "#6EE7B7"
+        color: "#6EE7B7",
+        fontSize: 19
     },
     inputForm: {
         borderRadius: 5,
@@ -43,10 +44,15 @@ export const globalStyleSheet = StyleSheet.create({
         padding: 3,
         color: "#a3afc2",
         width: "100%",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontSize: 17
     },
     formError: {
         color: "red",
+        fontSize: 12
+    },
+    validationMsg: {
+        color: "green",
         fontSize: 12
     }
 })

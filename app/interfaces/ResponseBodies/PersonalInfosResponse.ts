@@ -9,7 +9,7 @@ export interface PersonalInfosResponse
     pseudo: string;
     firstName: string;
     lastName: string;
-    birthdate: Date;
+    birthdate: string;
     notifyFriends: boolean;
     sex: SexInterface;
     address: AddressInterface;
