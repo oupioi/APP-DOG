@@ -14,9 +14,9 @@ export class EventService {
         };
     }
 
-    public async getEvents(): Promise<EventData[]>{
+    public async getEvents(): Promise<EventData>{
         const headers = await this.getHeaders();
-        const events: EventData[] = await axios.get(`${this.baseUrl}/api/event`, headers).then
+        const events: EventData = await axios.get(`${this.baseUrl}/api/event`, headers).then
         (res => res.data);
         return events;
     }

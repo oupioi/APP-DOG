@@ -1,13 +1,38 @@
-import { View, Text } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { EventService } from '../../services/EventService';
-
+import { EventInterface } from '../../interfaces/EventInterface';
 import EventCard from '../../components/EventCard';
 
+const eventService = new EventService();
+
 export default function Calendar() {
-  const [Events, SetEvents ] = useState();
-  // const data = getEvents();
+  const [events, setEvents] = useState<EventInterface[]>([]);
+
+  useEffect(() => {
+    getEvents();
+  }, []);
+
+  const getEvents = async () => {
+    try {
+      const list = await eventService.getEvents();
+      setEvents(list.events);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-   <View></View>
-  )
+    <View>
+      <ScrollView
+      style={{
+        marginHorizontal: 20,
+      }}
+      >
+      {events.map((event) => (
+        <EventCard key={event.title} {...event} />
+      ))}
+      </ScrollView>
+    </View>
+  );
 }

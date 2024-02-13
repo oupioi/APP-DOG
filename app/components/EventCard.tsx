@@ -2,7 +2,7 @@ import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
 import { EventInterface } from '../interfaces/EventInterface'
 
-export default function EventCard(event : EventInterface|null) {
+export default function EventCard(event : EventInterface) {
   return (
     <View style={styles.card}>
       <Text style={styles.title}>{event?.title}</Text>
