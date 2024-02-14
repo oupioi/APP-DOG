@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native';
-import { router } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { globalStyleSheet } from '../../constants/GlobalStyleSheet';
-import { SecureStoreTool } from '../utils/SecureStoreTool';
+import { SecureStoreTool } from '../../utils/SecureStoreTool';
 import { object, string, ValidationError } from 'yup';
-import { UserService } from '../services/UserService';
+import { UserService } from '../../services/UserService';
+import { globalStyleSheet } from '../../../constants/GlobalStyleSheet';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -25,7 +25,7 @@ export default function LoginScreen() {
   const getToken = async () => {
     const token = await SecureStoreTool.getItem('token');
     if (token) {
-      router.replace('/screens/HomeScreen');
+      router.replace('/screens/main/HomeScreen');
     }
   };
 
@@ -41,7 +41,7 @@ export default function LoginScreen() {
       }
       await userService.login({email: email, password: password});
 
-      router.replace('/screens/HomeScreen');
+      router.replace('/screens/main/HomeScreen');
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +79,7 @@ export default function LoginScreen() {
         </View>
         {errorMsg ? <Text style={globalStyleSheet.formError}>{errorMsg}</Text> : null}
       </View>
-
+      <Link href={'/screens/auth/RegisterScreen'}><Text style={viewStyle.noAccount}>No account yet ? Create one</Text></Link>
       <Pressable style={globalStyleSheet.greenButton} onPress={handleSubmit}>
          <Text style={globalStyleSheet.greenButtonText}>Login</Text>
       </Pressable>
@@ -96,4 +96,7 @@ const viewStyle = StyleSheet.create({
     alignItems: 'center',
     gap: 20,
   },
+  noAccount: {
+    fontSize: 10,
+  }
 });
