@@ -21,8 +21,9 @@ export default function AppLayout() {
                     />
                 )
             }}/>
+            
             <Tabs.Screen name='HomeScreen' options={{
-                headerTitle: 'Home',
+                headerShown: false,
                 tabBarLabel: "Home",
                 tabBarIcon: ({ focused }) => (
                   <Ionicons

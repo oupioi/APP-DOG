@@ -6,3 +6,8 @@ export interface ParkInterface {
     topography: boolean;
     address: AddressInterface
 }
+
+export interface ParkData {
+    parks: ParkInterface[];
+    total_items: number;
+}
