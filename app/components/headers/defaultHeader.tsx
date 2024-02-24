@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 type HeaderProps = {
     name: string;
+    children?: ReactNode
 }
-const DefaultHeader: React.FC<HeaderProps> = ({name}) => {
+const DefaultHeader: React.FC<HeaderProps> = ({name, children}) => {
     return (
-        <View style={s$.header}><Text style={s$.headerTitle}>{name}</Text><View style={s$.circleShape}></View></View>
+        <View style={s$.header}>
+            <>
+                <Text style={s$.headerTitle}>{name}</Text>
+                <View style={s$.circleShape}></View>
+            </>
+            <View style={{display: 'flex', flexDirection: 'row', gap: 10,alignItems: 'flex-start', marginRight: 20, justifyContent: 'flex-end'}}>
+                {children}
+            </View>
+        </View>
     )
 }
 
 const s$ = StyleSheet.create({
     header: {
         marginTop: 80,
-        marginLeft: 20,
         position: 'relative',
-        width: 100,
+        width: '100%',
         marginBottom: 0,
         height: 60,
-        backgroundColor: 'transparent'
+        display: 'flex',
+        flexDirection: 'row',
+        backgroundColor: 'transparent',
+        justifyContent: 'space-between'
     },
     headerTitle: {
+        marginLeft: 20,
         color: 'white',
         fontSize: 25,
         fontWeight: '800'

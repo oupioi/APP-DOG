@@ -4,8 +4,8 @@ import TopButton from '../../../components/headers/topButton'
 
 export default function _layout() {
   return (
-      <Stack screenOptions={{headerTitleAlign: 'left',}}>
-        <Stack.Screen name='ProfileScreen' options={{
+      <Stack screenOptions={{headerShown: false}}>
+        {/* <Stack.Screen name='ProfileScreen' options={{
           headerTitle: 'Profile',
           // header: () => <DefaultHeader name='Profile'/>
           headerStyle: {
@@ -16,7 +16,7 @@ export default function _layout() {
           },
           headerTitleAlign: 'left',
           headerRight: () => <><TopButton icon='team' color='white' callBack={() => {router.push('/screens/main/LoginScreen')}}/></>
-        }}></Stack.Screen>
+        }}></Stack.Screen> */}
       </Stack>
   )
 }
