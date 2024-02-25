@@ -45,4 +45,9 @@ export class EventService {
         const headers = await this.getHeaders();
         return await axios.post(`${this.baseUrl}/api/event/join/${eventId}`, null, headers);
     }
+
+    public async getAddress(eventId: number) {
+        const headers = await this.getHeaders();
+        return await axios.get(`${this.baseUrl}/api/event/address/${eventId}`, headers);
+    }
 }
