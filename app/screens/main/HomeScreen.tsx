@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps';
 import { ParkService } from '../../services/ParkService';
 import { ParkInterface } from '../../interfaces/ParkInterface';
@@ -7,6 +7,7 @@ import ParkCard from '../../components/ParkCard';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import DefaultHeader from '../../components/headers/defaultHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
 
 const parkService = new ParkService();
 
@@ -30,34 +31,36 @@ const MapScreen = () => {
 
   return (
     <>
-      <DefaultHeader name='Home'></DefaultHeader>
-      <ScrollView>
-        <SafeAreaView style={styles.container}>
-          {/* <MapView style={styles.map} /> */}
-          {
-            parks.map((park) => (
-              <ParkCard key={park.id} {...park} />
-            ))
-          }
-        </SafeAreaView>
-      </ScrollView>
+      <DefaultHeader name='Home' />
+      <SafeAreaView style={styles.container}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <Text style={styles.header}>Parcs :</Text>
+          <TouchableOpacity onPress={() => console.log('Afficher tous les parcs')}>
+            <Link href={"/screens/main/park/ParkScreen"} style={{}} >Afficher tout les parcs</Link>
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          data={parks}
+          renderItem={({ item }) => <ParkCard {...item} />}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
+        />
+      </SafeAreaView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-    gap: 10
+    marginTop: 20,
+    marginLeft: 10,
+    marginRight: 10
   },
-  map: {
-    width: '100%',
-    height: '100%',
-  },
+  header: {
+    alignSelf: "flex-start",
+    marginLeft: 5,
+    marginBottom: 5
+  }
 });
 
 export default MapScreen;

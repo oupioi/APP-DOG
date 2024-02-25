@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, ViewStyle } from "react-native";
 import { ParkInterface } from "../interfaces/ParkInterface";
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function ParkCard(park: ParkInterface) {
+export default function ParkCard(park: ParkInterface){
     return (
         <View style={styles.container}>
             <MaterialIcons name="park" size={24} color="black" />
@@ -20,11 +20,12 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderRadius: 8,
         borderColor: "#c3cede",
-        width: "90%",
-        paddingHorizontal: 20,
-        paddingVertical: 40,
-        gap: 10,
-        alignItems: 'center'
+        paddingHorizontal: 5,
+        paddingVertical: 10,
+        gap: 5,
+        alignItems: 'center',
+        width: 300,
+        marginRight: 20
     },
     logo: {
         width: 100,
@@ -32,4 +33,3 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     }
 })
-
