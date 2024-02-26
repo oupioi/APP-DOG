@@ -13,9 +13,9 @@ export default function ParkScreen() {
 
     const getParks = async () => {
         try {
-            const response: ParkInterface[] = await parkService.getAllParks();
+            const response = await parkService.getAllParks();
             console.log(response);
-            setParks(response)
+            setParks(response.parks);
 
         } catch (error) {
             throw error as ErrorResponse
@@ -31,7 +31,7 @@ export default function ParkScreen() {
         <SafeAreaView>
             {
                 parks.map((park: ParkInterface) => (
-                    <ParkCard name={park.name}></ParkCard>
+                    <ParkCard {...park}></ParkCard>
                 ))
             }
         </SafeAreaView>

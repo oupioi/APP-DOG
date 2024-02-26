@@ -36,7 +36,7 @@ const MapScreen = () => {
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <Text style={styles.header}>Parcs :</Text>
           <TouchableOpacity onPress={() => console.log('Afficher tous les parcs')}>
-            <Link href={"/screens/main/park/ParkScreen"} style={{}} >Afficher tout les parcs</Link>
+            <Link href={"/screens/main/ParkScreen"} style={{}} >Afficher tout les parcs</Link>
           </TouchableOpacity>
         </View>
         <FlatList
