@@ -1,15 +1,25 @@
-import { View, Text, ScrollView, Button, Alert, Pressable } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, ScrollView, Button, Alert, Pressable, RefreshControl } from 'react-native'
+import React, { useEffect, useState, useCallback } from 'react'
 import { EventService } from '../../services/EventService';
 import { EventInterface } from '../../interfaces/EventInterface';
 import EventCard from '../../components/EventCard';
 import { StyleSheet } from 'react-native';
+import Boutton from '../../components/Button';
 
 
 const eventService = new EventService();
 
 export default function Calendar() {
   const [events, setEvents] = useState<EventInterface[]>([]);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    getEvents();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     getEvents();
@@ -35,37 +45,26 @@ export default function Calendar() {
 
   const styles = StyleSheet.create({
     fixToText: {
-      flexDirection: 'row'
-    },
-    button : {
-      borderRadius: 6,
-      elevation: 3,
-      backgroundColor: '#fff',
-      shadowOffset: { width: 1, height: 1 },
-      shadowColor: '#333',
-      shadowOpacity: 0.3,
-      shadowRadius: 2,
-      marginHorizontal: 4.5,
-      paddingVertical: 10,
-      paddingHorizontal: 20
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginHorizontal: 90,
+      marginTop: 10
     }
   });
-
 
   return (
     <View>
       <View style={styles.fixToText}>
-      <Pressable style={styles.button}>
-      <Text>À Venir</Text>
-      </Pressable>
-      <Pressable style={styles.button}>
-      <Text>Passé</Text>
-      </Pressable>
+      <Boutton backgroundColor='grey' title="A venir" isClicked={true}/>
+      <Boutton backgroundColor='grey' title="Passés" isClicked={false}/>
     </View>
       <ScrollView
         style={{
           marginHorizontal: 20,
         }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         {events.map((event) => (
           <EventCard key={event.title} {...event} />

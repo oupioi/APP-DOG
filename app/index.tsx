@@ -9,7 +9,7 @@ export default function Page() {
 
   useEffect(() => {
     const getStoredUser = async () => {
-      // await SecureStoreTool.delete('token')
+      //await SecureStoreTool.delete('token')
       const foundToken = await SecureStoreTool.getItem('token');
       const foundId = await SecureStoreTool.getItem('user_id');
   
