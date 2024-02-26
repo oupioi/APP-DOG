@@ -4,7 +4,7 @@ import { EventService } from '../../services/EventService';
 import { EventInterface } from '../../interfaces/EventInterface';
 import EventCard from '../../components/EventCard';
 import { StyleSheet } from 'react-native';
-import Boutton from '../../components/Button';
+import Bouton from '../../components/Bouton';
 
 
 const eventService = new EventService();
@@ -18,7 +18,7 @@ export default function Calendar() {
     getEvents();
     setTimeout(() => {
       setRefreshing(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -55,8 +55,8 @@ export default function Calendar() {
   return (
     <View>
       <View style={styles.fixToText}>
-      <Boutton backgroundColor='grey' title="A venir" isClicked={true}/>
-      <Boutton backgroundColor='grey' title="Passés" isClicked={false}/>
+      <Bouton backgroundColor='grey' title="A venir" isClicked={true}/>
+      <Bouton backgroundColor='grey' title="Passés" isClicked={false}/>
     </View>
       <ScrollView
         style={{
