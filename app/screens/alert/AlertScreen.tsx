@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AlertInterface } from "../../interfaces/AlertInterface";
-import AlertCard from "../../components/AlertCard";
+import AlertCard from "../../components/alert/AlertCard";
 import { AlertService } from "../../services/AlertService";
 import { ErrorResponse } from "../../interfaces/ResponseBodies/ErrorResponse";
 import { SafeAreaView } from "react-native-safe-area-context";
