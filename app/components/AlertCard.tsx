@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet } from "react-native";
 import { AlertInterface } from "../interfaces/AlertInterface";
-import { MaterialIcons } from "@expo/vector-icons";
+import { Foundation } from '@expo/vector-icons';
 
 export default function AlertCard(alert: AlertInterface) {
     return (
         <View style={styles.container}>
-            <MaterialIcons name="park" size={24} color="black" />
+            <Foundation name="alert" size={24} color="black" />
             <Text>{alert.title}</Text>
             <Text>{alert.created_at.getDate()}</Text>
             <Text>{alert.content}</Text>
@@ -29,10 +29,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 300,
         marginRight: 20
-    },
-    logo: {
-        width: 100,
-        height: 100,
-        marginBottom: 10,
     }
 })
