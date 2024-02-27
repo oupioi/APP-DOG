@@ -50,4 +50,32 @@ export class EventService {
         const headers = await this.getHeaders();
         return await axios.get(`${this.baseUrl}/api/event/address/${eventId}`, headers);
     }
+
+    public async getfuturEvent(): Promise<EventData>{
+        const headers = await this.getHeaders();
+        let e: EventData = { events: [], total_items: 0 };
+        await axios.get(`${this.baseUrl}/api/event/future`, headers).then(
+            (res) => {
+                for (let i = 0; i < res.data.length; i++) {
+                    e.events.push(res.data[i]);
+                }
+                e.total_items = res.data.length;
+            }
+        )
+        return e;
+    }
+
+    public async getpastEvent(): Promise<EventData>{
+        const headers = await this.getHeaders();
+        let e: EventData = { events: [], total_items: 0 };
+        await axios.get(`${this.baseUrl}/api/event/past`, headers).then(
+            (res) => {
+                for (let i = 0; i < res.data.length; i++) {
+                    e.events.push(res.data[i]);
+                }
+                e.total_items = res.data.length;
+            }
+        )
+        return e;
+    }
 }

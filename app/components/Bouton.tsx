@@ -2,16 +2,15 @@ import React from 'react';
 import { Text, StyleSheet, Pressable } from 'react-native';
 
 interface BoutonProps {
-    backgroundColor?: string;
     title?: string;
-    isClicked: boolean;
+    onPress: () => void;
 }
 
 export default function Bouton(props: BoutonProps) {
-    const { backgroundColor, title = 'Bouton', isClicked } = props;
+    const { title = 'Save', onPress } = props;
 
     return (
-        <Pressable style={styles.button}>
+        <Pressable style={styles.button} onPress={onPress}>
             <Text style={styles.text}>{title}</Text>
         </Pressable>
     );

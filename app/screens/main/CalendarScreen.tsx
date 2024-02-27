@@ -52,11 +52,29 @@ export default function Calendar() {
     }
   });
 
+  const getFutureEvents = async () => {
+    try {
+      const list = await eventService.getfuturEvent();
+      setEvents(list.events);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getPastEvents = async () => {
+    try {
+      const list = await eventService.getpastEvent();
+      setEvents(list.events);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <View>
       <View style={styles.fixToText}>
-      <Bouton backgroundColor='grey' title="A venir" isClicked={true}/>
-      <Bouton backgroundColor='grey' title="Passés" isClicked={false}/>
+      <Bouton title="A venir" onPress={getFutureEvents}/>
+      <Bouton title="Passés"  onPress={getPastEvents}/>
     </View>
       <ScrollView
         style={{
@@ -67,7 +85,7 @@ export default function Calendar() {
         }
       >
         {events.map((event) => (
-          <EventCard key={event.title} {...event} />
+          <EventCard key={String(event.id)} {...event} />
         ))}
       </ScrollView>
     </View>
