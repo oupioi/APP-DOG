@@ -3,9 +3,9 @@ import { Pressable, StyleSheet } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 
 type TopButtonProps = {
-    icon: 'team';
+    icon: 'team'|'user';
     color: string;
-    callBack?: () => void; 
+    callBack?: () => void;
 }
 
 const TopButton: React.FC<TopButtonProps> = (props) => {

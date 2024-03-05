@@ -4,7 +4,7 @@ import { SexInterface } from "../SexInterface";
 
 export interface PersonalInfosResponse
 {
-    id?: number;
+    id: number;
     email: string;
     pseudo: string;
     firstName: string;
