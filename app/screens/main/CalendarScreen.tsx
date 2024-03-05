@@ -6,7 +6,6 @@ import EventCard from '../../components/EventCard';
 import { StyleSheet } from 'react-native';
 import Bouton from '../../components/Bouton';
 
-
 const eventService = new EventService();
 
 export default function Calendar() {
@@ -33,15 +32,6 @@ export default function Calendar() {
       console.log(error);
     }
   };
-
-  const getAdress = async (id: number) => {
-    try {
-      const address = await eventService.getAddress(id);
-      return address;
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const styles = StyleSheet.create({
     fixToText: {
@@ -73,8 +63,8 @@ export default function Calendar() {
   return (
     <View>
       <View style={styles.fixToText}>
-      <Bouton title="A venir" onPress={getFutureEvents}/>
-      <Bouton title="Passés"  onPress={getPastEvents}/>
+      <Bouton title="A venir" function1={getFutureEvents}/>
+      <Bouton title="Passés"  function1={getPastEvents}/>
     </View>
       <ScrollView
         style={{

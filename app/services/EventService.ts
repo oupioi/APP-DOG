@@ -21,9 +21,12 @@ export class EventService {
         return events;
     }
 
-    public async getEventById(eventId: number) {
+    public async getEventById(eventId: number) : Promise<EventInterface>{
         const headers = await this.getHeaders();
-        return await axios.get(`${this.baseUrl}/api/event/${eventId}`, headers);
+        const event = await axios.get(`${this.baseUrl}/api/event/${eventId}`, headers).then
+        (res => res.data);
+        return event;
+
     }
 
     public async createEvent(data: EventInterface) {
@@ -31,17 +34,17 @@ export class EventService {
         return await axios.post(`${this.baseUrl}/api/event`, data, headers);
     }
 
-    public async updateEvent(eventId: number, data: EventInterface) {
+    public async updateEvent(eventId: Number, data: EventInterface) {
         const headers = await this.getHeaders();
         return await axios.put(`${this.baseUrl}/api/event/${eventId}`, data, headers);
     }
 
-    public async deleteEvent(eventId: number) {
+    public async deleteEvent(eventId: Number) {
         const headers = await this.getHeaders();
         return await axios.delete(`${this.baseUrl}/api/event/${eventId}`, headers);
     }
 
-    public async joinEvent(eventId: number) {
+    public async joinEvent(eventId: Number) {
         const headers = await this.getHeaders();
         return await axios.post(`${this.baseUrl}/api/event/join/${eventId}`, null, headers);
     }

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Text, StyleSheet, Pressable } from 'react-native';
-
+import Colors from '../../constants/Colors';
 interface BoutonProps {
     title?: string;
-    onPress: () => void;
+    function1: () => void;
 }
 
 export default function Bouton(props: BoutonProps) {
-    const { title = 'Save', onPress } = props;
+    const { title = 'Boutton', function1 } = props;
 
     return (
-        <Pressable style={styles.button} onPress={onPress}>
+        <Pressable style={styles.button} onPress={function1}>
             <Text style={styles.text}>{title}</Text>
         </Pressable>
     );
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 4,
         elevation: 3,
+        backgroundColor: 'black',
     },
     text: {
         fontSize: 16,

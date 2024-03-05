@@ -1,5 +1,7 @@
+import { AddressInterface } from "./AddressInterface";
+
 export interface EventInterface {
-    id?: Number;
+    id?: number;
     title: string;
     description: string;
     maxPeople: number;
@@ -7,7 +9,7 @@ export interface EventInterface {
     closed: boolean;
     public: boolean;
     date: Date;
-    idAddress: number;
+    address: AddressInterface
     tabUser: number[];
 }
 

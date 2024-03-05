@@ -1,21 +1,31 @@
-import { View, Text,StyleSheet,Image } from 'react-native'
+import { View, Text,StyleSheet,Image, Pressable } from 'react-native'
 import React from 'react'
 import { EventInterface } from '../interfaces/EventInterface'
+import { router } from 'expo-router';
+
 
 export default function EventCard(event : EventInterface) {
+  const EventId : number = event.id!;
 
   const convertDate = (date: Date) => {
     const d = new Date(date);
     return d.toLocaleDateString() + " " + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
+
+  const NavigateToEvent = () => {
+    router.push({ pathname: '/screens/main/EventScreen', params: { id: EventId } });
+  }
+
   return (
-    <View style={styles.card}>
-      <Image source={{ uri: 'https://icons8.com/icon/19821/dog-park'}}/>
-      <Text style={styles.title}>{event?.title}</Text>
-      <Text style={styles.other}>📍  Code Postal</Text>
-      <Text style={styles.other}>📅  {convertDate(event?.date)} </Text>
-      <Text style={styles.description}> Description : {event?.description}</Text>
-    </View>
+    <Pressable onPress={() => NavigateToEvent()}>
+      <View style={styles.card}>
+        <Image source={{ uri: 'https://icons8.com/icon/19821/dog-park'}}/>
+        <Text style={styles.title}>{event?.title}</Text>
+        <Text style={styles.other}>📍{event?.address.city},{event?.address.zipCode}</Text>
+        <Text style={styles.other}>📅  {convertDate(event?.date)} </Text>
+        <Text style={styles.description}> Description : {event?.description}</Text>
+      </View>
+    </Pressable>
   )
 }
 const styles = StyleSheet.create({
